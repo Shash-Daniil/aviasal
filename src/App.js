@@ -48,8 +48,10 @@ function App(props) {
   useEffect(() => {
     const ticketsArr = JSON.parse(JSON.stringify(state.ticketsArr)).filter((elem) => {
       const arr = { ...elem };
-      arr.segments = arr.segments.filter((segment) => state.filters.indexOf(segment.stops.length) !== -1);
-      return arr.segments.length !== 0;
+
+      // eslint-disable-next-line no-param-reassign
+      elem.segments = arr.segments.filter((segment) => state.filters.indexOf(segment.stops.length) !== -1);
+      return elem.segments.length !== 0;
     });
     setFilteredTickets(ticketsArr);
   }, [state.filters, state.ticketsArr]);

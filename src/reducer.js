@@ -1,6 +1,6 @@
 const initialState = {
   ticketsSort: 'cheapest',
-  filters: [1, 2, 0],
+  filters: [1, 2],
   loading: false,
   ticketsArr: [],
   filteredTicketsArr: [],
