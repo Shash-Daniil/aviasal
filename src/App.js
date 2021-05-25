@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import getTime from 'date-fns/getTime';
 import Ticket from './components/ticket/Ticket';
+import Button from './components/button/button';
 import Sidebar from './components/sidebar/Sidebar';
 import * as actions from './actions/actions';
 import AviaLogo from './img/Logo.png';
@@ -17,6 +19,7 @@ const { app, main, bilets, biletsFilter, biletsBtn, selected, aviaLogo, mainCont
 function App(props) {
   const { getTickets, changeSort, setFilteredTickets, state } = props;
   const [searchId, setSearchId] = useState('');
+  const [spliceIndex, setSpliceIndex] = useState(5);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -34,25 +37,19 @@ function App(props) {
     }
   });
 
-  if (state.ticketsSort === 'cheapest') {
-    // Эта дичь сортирует билеты: по возрастанию
-    state.filteredTicketsArr.sort((aElem, bElem) => aElem.price - bElem.price); // цены, по возрастанию времени в пути
-  } else if (state.ticketsSort === 'fastest') {
-    state.filteredTicketsArr.sort((aElem, bElem) => {
-      const aMinDuration = Math.min(...aElem.segments.map((elem) => elem.duration));
-      const bMinDuration = Math.min(...bElem.segments.map((elem) => elem.duration));
-      return aMinDuration - bMinDuration;
-    });
-  }
-
   useEffect(() => {
     const ticketsArr = JSON.parse(JSON.stringify(state.ticketsArr)).filter((elem) => {
+      let peresadki = 0;
       const arr = { ...elem };
-
-      // eslint-disable-next-line no-param-reassign
-      elem.segments = arr.segments.filter((segment) => state.filters.indexOf(segment.stops.length) !== -1);
-      return elem.segments.length !== 0;
+      if (props.state.filters.length === 4) {
+        return true;
+      }
+      arr.segments.forEach((segment) => {
+        peresadki += segment.stops.length;
+      });
+      return props.state.filters.indexOf(peresadki) !== -1;
     });
+
     setFilteredTickets(ticketsArr);
   }, [state.filters, state.ticketsArr]);
 
@@ -77,6 +74,12 @@ function App(props) {
               type="button"
               value="Самый быстрый"
             />
+            <input
+              onClick={() => changeSort('optimal')}
+              className={[biletsBtn, state.ticketsSort === 'optimal' ? selected : null].join(' ')}
+              type="button"
+              value="Оптимальный"
+            />
           </div>
           <div className={bilets}>
             {state.filters.length === 0 || state.filteredTicketsArr.length === 0 ? (
@@ -86,11 +89,19 @@ function App(props) {
                 style={{ marginTop: '20px' }}
               />
             ) : null}
-            {state.filteredTicketsArr.map((elem) => (
-              <Ticket key={elem.price} price={elem.price} carrier={elem.carrier} segments={elem.segments} />
+            {[...state.filteredTicketsArr].splice(0, spliceIndex).map((elem) => (
+              <Ticket
+                key={Math.floor(elem.segments[0].duration + getTime(new Date(elem.segments[0].date)))}
+                price={elem.price}
+                carrier={elem.carrier}
+                segments={elem.segments}
+              />
             ))}
             {!state.stop ? <Spin style={{ marginTop: '20px' }} /> : null}
           </div>
+          {state.filters.length === 0 || state.filteredTicketsArr.length === 0 ? null : (
+            <Button setSpliceIndex={() => setSpliceIndex(spliceIndex + 5)} />
+          )}
         </main>
       </main>
     </div>

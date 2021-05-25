@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import css from '../../app.module.css';
-import logo from '../../img/s7logo.png';
 import TicketInfo from '../ticketInfo/TicketInfo';
 
 const { bilet, biletHeader, biletPrice, biletLogo } = css;
@@ -23,8 +22,7 @@ const Ticket = (props) => {
       <header className={biletHeader}>
         <div className={biletPrice}>{`${price} Р`}</div>
         <div className={biletLogo}>
-          <img src={logo} alt="carrier logo" />
-          {carrier}
+          <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt="carrier logo" />
         </div>
       </header>
       {segments.map((elem) => (

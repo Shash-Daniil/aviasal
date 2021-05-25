@@ -60,6 +60,7 @@
     border-radius: 5px;
     overflow: hidden;
     background-color: #FFFFFF;
+    display: flex;
 }
 
 .biletsBtn {
@@ -67,10 +68,15 @@
     text-transform: uppercase;
     border: none;
     background: none;
-    width: 50%;
+    flex-grow: 1;
     padding: 15px 0;
     font-weight: 600;
     font-size: 12px;
+}
+
+.biletsBtn:nth-of-type(2) {
+    border-left: 1px solid #DFE5EC;
+    border-right: 1px solid #DFE5EC;
 }
 
 .biletsBtn:hover {
