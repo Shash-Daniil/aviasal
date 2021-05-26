@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from '../../app.module.css';
-import TicketInfo from '../ticketInfo/TicketInfo';
+import css from './Ticket.module.css';
+import TicketInfo from '../TicketInfo/TicketInfo';
 
 const { bilet, biletHeader, biletPrice, biletLogo } = css;
 
@@ -10,8 +10,9 @@ const Ticket = (props) => {
   let { price } = props;
 
   if (String(price).split('').length > 3) {
-    price = String(price).split(''); //   Эт чтоб был пробел в цене: "30 000 Р" Вместо "30000 Р"
-    price.splice(price.length - 3, 0, ' '); //                       KEK
+    // Эт чтоб был пробел в цене: "30 000 Р" Вместо "30000 Р"
+    price = String(price).split('');
+    price.splice(price.length - 3, 0, ' ');
     price = price.join('');
   }
 

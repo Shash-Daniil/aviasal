@@ -5,7 +5,7 @@ import set from 'date-fns/set';
 import add from 'date-fns/add';
 import PropTypes from 'prop-types';
 import React from 'react';
-import css from '../../app.module.css';
+import css from './TicketInfo.module.css';
 
 const { biletInfo, infoItem, infoItemTitle, infoItemText } = css;
 

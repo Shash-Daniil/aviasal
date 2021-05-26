@@ -3,60 +3,43 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
-import css from '../../app.module.css';
-import * as actions from '../../actions/actions';
+import { ALL } from '../../constants/filterTypes';
+import css from './Sidebar.module.css';
+import * as actions from '../../redux/actions/actions';
 
 const { sidebar, filter, filterItem, title } = css;
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const Sidebar = (props) => {
   const { filters, changeFilter } = props;
+
+  const styles = { width: '100%', padding: '10px 20px' };
   return (
     <div className={sidebar}>
       <div className={title}>Количество пересадок</div>
       <ul className={filter}>
         <li className={filterItem}>
-          <Checkbox
-            style={{ width: '100%' }}
-            onChange={() => changeFilter('all')}
-            checked={filters.length === 4 ? '1' : ''}
-          >
+          <Checkbox style={styles} onChange={() => changeFilter(ALL)} checked={filters.length === 4 ? '1' : ''}>
             Все
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox
-            style={{ width: '100%' }}
-            onChange={() => changeFilter(0)}
-            checked={filters.indexOf(0) !== -1 ? '1' : ''}
-          >
+          <Checkbox style={styles} onChange={() => changeFilter(0)} checked={filters.indexOf(0) !== -1 ? '1' : ''}>
             Без пересадок
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox
-            style={{ width: '100%' }}
-            onChange={() => changeFilter(1)}
-            checked={filters.indexOf(1) !== -1 ? '1' : ''}
-          >
+          <Checkbox style={styles} onChange={() => changeFilter(1)} checked={filters.indexOf(1) !== -1 ? '1' : ''}>
             1 пересадка
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox
-            style={{ width: '100%' }}
-            onChange={() => changeFilter(2)}
-            checked={filters.indexOf(2) !== -1 ? '1' : ''}
-          >
+          <Checkbox style={styles} onChange={() => changeFilter(2)} checked={filters.indexOf(2) !== -1 ? '1' : ''}>
             2 пересадки
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox
-            style={{ width: '100%' }}
-            onChange={() => changeFilter(3)}
-            checked={filters.indexOf(3) !== -1 ? '1' : ''}
-          >
+          <Checkbox style={styles} onChange={() => changeFilter(3)} checked={filters.indexOf(3) !== -1 ? '1' : ''}>
             3 пересадки
           </Checkbox>
         </li>

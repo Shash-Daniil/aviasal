@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import getTime from 'date-fns/getTime';
-import Ticket from './components/ticket/Ticket';
-import Button from './components/button/button';
-import Sidebar from './components/sidebar/Sidebar';
-import * as actions from './actions/actions';
+import Ticket from './components/Ticket/Ticket';
+import Button from './components/Button/Button';
+import Sidebar from './components/Sidebar/Sidebar';
+import { CHEAPEST, FASTEST, OPTIMAL } from './constants/sortValues';
+import * as actions from './redux/actions/actions';
 import AviaLogo from './img/Logo.png';
 
-import css from './app.module.css';
+import css from './App.module.css';
 
 import '../node_modules/antd/dist/antd.css';
 
@@ -50,8 +51,8 @@ function App(props) {
       return props.state.filters.indexOf(peresadki) !== -1;
     });
 
-    setFilteredTickets(ticketsArr);
-  }, [state.filters, state.ticketsArr]);
+    setFilteredTickets([...ticketsArr].splice(0, spliceIndex));
+  }, [state.filters, state.ticketsArr, spliceIndex]);
 
   return (
     <div className={app}>
@@ -63,20 +64,20 @@ function App(props) {
         <main className={main}>
           <div className={biletsFilter}>
             <input
-              onClick={() => changeSort('cheapest')}
-              className={[biletsBtn, state.ticketsSort === 'cheapest' ? selected : null].join(' ')}
+              onClick={() => changeSort(CHEAPEST)}
+              className={[biletsBtn, state.ticketsSort === CHEAPEST ? selected : null].join(' ')}
               type="button"
               value="Самый дешевый"
             />
             <input
-              onClick={() => changeSort('fastest')}
-              className={[biletsBtn, state.ticketsSort === 'fastest' ? selected : null].join(' ')}
+              onClick={() => changeSort(FASTEST)}
+              className={[biletsBtn, state.ticketsSort === FASTEST ? selected : null].join(' ')}
               type="button"
               value="Самый быстрый"
             />
             <input
-              onClick={() => changeSort('optimal')}
-              className={[biletsBtn, state.ticketsSort === 'optimal' ? selected : null].join(' ')}
+              onClick={() => changeSort(OPTIMAL)}
+              className={[biletsBtn, state.ticketsSort === OPTIMAL ? selected : null].join(' ')}
               type="button"
               value="Оптимальный"
             />
@@ -89,9 +90,9 @@ function App(props) {
                 style={{ marginTop: '20px' }}
               />
             ) : null}
-            {[...state.filteredTicketsArr].splice(0, spliceIndex).map((elem) => (
+            {state.filteredTicketsArr.map((elem) => (
               <Ticket
-                key={Math.floor(elem.segments[0].duration + getTime(new Date(elem.segments[0].date)))}
+                key={Math.floor(elem.segments[0].duration + getTime(new Date(elem.segments[0].date)) - elem.price)}
                 price={elem.price}
                 carrier={elem.carrier}
                 segments={elem.segments}
@@ -100,7 +101,7 @@ function App(props) {
             {!state.stop ? <Spin style={{ marginTop: '20px' }} /> : null}
           </div>
           {state.filters.length === 0 || state.filteredTicketsArr.length === 0 ? null : (
-            <Button setSpliceIndex={() => setSpliceIndex(spliceIndex + 5)} />
+            <Button handler={() => setSpliceIndex(spliceIndex + 5)} text="ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!" />
           )}
         </main>
       </main>

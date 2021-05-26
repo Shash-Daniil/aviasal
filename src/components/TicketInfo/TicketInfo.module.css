@@ -1,0 +1,24 @@
+.biletInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.infoItem {
+    flex-basis: 141px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.infoItemTitle {
+    color: #A0B0B9;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.infoItemText {
+    font-weight: 600;
+    font-size: 14px;
+}

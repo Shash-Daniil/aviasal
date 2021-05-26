@@ -1,0 +1,33 @@
+.title {
+    padding: 0 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+}
+
+.sidebar {
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    width: 232px;
+    height: 252px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.filter {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+.filterItem {
+    display: block;
+}
+
+.filterItem:hover {
+    background: #F1FCFF;
+}

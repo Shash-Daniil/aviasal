@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+.app {
+    width: 754px;
+    margin: 0 auto;
+    font-family: 'Open Sans';
+    color: #4A4A4A;
+}
+
+.mainContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+}
+
+.main {
+    width: 502px;
+}
+
+.biletsFilter {
+    border: 1px solid #DFE5EC;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    display: flex;
+}
+
+.biletsBtn {
+    cursor: pointer;
+    color: inherit;
+    text-transform: uppercase;
+    border: none;
+    background: none;
+    flex-grow: 1;
+    padding: 15px 0;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.biletsBtn:nth-of-type(2) {
+    border-left: 1px solid #DFE5EC;
+    border-right: 1px solid #DFE5EC;
+}
+
+.biletsBtn:hover {
+    background-color: #2196F3;
+    color: #FFFFFF;
+}
+
+.selected {
+    background-color: #2196F3; 
+    color: #FFFFFF;
+}
+
+.bilets {
+    display: flex;
+    flex-direction: column;
+}
+
+.aviaLogo {
+    
+}
