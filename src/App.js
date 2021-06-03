@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import getTime from 'date-fns/getTime';
+
 import Ticket from './components/Ticket/Ticket';
 import Button from './components/Button/Button';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -90,13 +90,8 @@ function App(props) {
                 style={{ marginTop: '20px' }}
               />
             ) : null}
-            {state.filteredTicketsArr.map((elem) => (
-              <Ticket
-                key={Math.floor(elem.segments[0].duration + getTime(new Date(elem.segments[0].date)) - elem.price)}
-                price={elem.price}
-                carrier={elem.carrier}
-                segments={elem.segments}
-              />
+            {state.filteredTicketsArr.map((elem, id) => (
+              <Ticket key={Math.floor(id)} price={elem.price} carrier={elem.carrier} segments={elem.segments} />
             ))}
             {!state.stop ? <Spin style={{ marginTop: '20px' }} /> : null}
           </div>
