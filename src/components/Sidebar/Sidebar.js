@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
-import { ALL } from '../../constants/filterTypes';
+import { ALL, ONE, TWO, THREE, WITHOUT } from '../../constants/filterTypes';
 import css from './Sidebar.module.css';
 import * as actions from '../../redux/actions/actions';
 
@@ -26,22 +26,26 @@ const Sidebar = (props) => {
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox style={styles} onChange={() => changeFilter(0)} checked={filters.indexOf(0) !== -1 ? '1' : ''}>
+          <Checkbox
+            style={styles}
+            onChange={() => changeFilter(WITHOUT)}
+            checked={filters.includes(WITHOUT) ? '1' : ''}
+          >
             Без пересадок
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox style={styles} onChange={() => changeFilter(1)} checked={filters.indexOf(1) !== -1 ? '1' : ''}>
+          <Checkbox style={styles} onChange={() => changeFilter(ONE)} checked={filters.includes(ONE) ? '1' : ''}>
             1 пересадка
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox style={styles} onChange={() => changeFilter(2)} checked={filters.indexOf(2) !== -1 ? '1' : ''}>
+          <Checkbox style={styles} onChange={() => changeFilter(TWO)} checked={filters.includes(TWO) ? '1' : ''}>
             2 пересадки
           </Checkbox>
         </li>
         <li className={filterItem}>
-          <Checkbox style={styles} onChange={() => changeFilter(3)} checked={filters.indexOf(3) !== -1 ? '1' : ''}>
+          <Checkbox style={styles} onChange={() => changeFilter(THREE)} checked={filters.includes(THREE) ? '1' : ''}>
             3 пересадки
           </Checkbox>
         </li>

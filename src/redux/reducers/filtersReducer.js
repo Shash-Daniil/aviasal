@@ -1,7 +1,7 @@
-import { ALL } from '../../constants/filterTypes';
+import { ALL, ONE, TWO, THREE, WITHOUT } from '../../constants/filterTypes';
 import { CHANGE_FILTER } from '../../constants/actionTypes';
 
-const initialState = [1, 2];
+const initialState = [ONE, TWO];
 
 const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,7 +11,7 @@ const filtersReducer = (state = initialState, action) => {
         if (filters.length === 4) {
           filters = [];
         } else {
-          filters = [1, 2, 3, 0];
+          filters = [ONE, TWO, THREE, WITHOUT];
         }
       } else if (!filters.includes(action.filterType)) {
         filters.push(action.filterType);
