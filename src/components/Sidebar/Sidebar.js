@@ -10,6 +10,8 @@ import * as actions from '../../redux/actions/actions';
 const { sidebar, filter, filterItem, title } = css;
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 const Sidebar = (props) => {
   const { filters, changeFilter } = props;
 

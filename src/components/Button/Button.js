@@ -8,7 +8,11 @@ const Button = (props) => {
   const handler = props.handler ? props.handler : null; // eslint-disable-line react/destructuring-assignment
   const { text } = props;
 
-  return <input onClick={handler} className={button} type="button" value={text} />;
+  return (
+    <button type="button" onClick={handler} className={button}>
+      {text}
+    </button>
+  );
 };
 
 Button.propTypes = {

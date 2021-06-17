@@ -12,8 +12,12 @@ const Ticket = (props) => {
   if (String(price).split('').length > 3) {
     // Эт чтоб был пробел в цене: "30 000 Р" Вместо "30000 Р"
     price = String(price).split('');
-    price.splice(price.length - 3, 0, ' ');
-    price = price.join('');
+    let i = price.length - 1;
+    while (i > 1) {
+      price.splice(i - 2, 0, ' ');
+      i -= 3;
+    }
+    price = price.join('').trim();
   }
 
   segments.sort((aElem, bElem) => aElem.stops.length - bElem.stops.length);
